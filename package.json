@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "api-test": "concurrently \"pnpm dev\" \"wait-on http://localhost:3001/api/builds && pnpm exec vitest\"",
+    "gui-test": "concurrently \"pnpm dev\" \"wait-on http://localhost:3000 && pnpm exec playwright test\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -45,6 +46,7 @@
     "tsx": "^4.21.0",
     "typescript": "^5.3.3",
     "vite": "^5.1.4",
-    "vitest": "^2.1.9"
+    "vitest": "^2.1.9",
+    "wait-on": "^9.0.10"
   }
 }
