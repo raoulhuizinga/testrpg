@@ -33,6 +33,10 @@ pnpm gui-test
 
 Runs integration tests against the Express API on `http://localhost:3001`.
 
+> ⚠️
+Make sure there is no active server running in your terminal, otherwise the port will already be in use. 
+the wait-on function expects the 3001 port.
+
 ```bash
 pnpm api-test
 ```
