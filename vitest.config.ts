@@ -5,7 +5,6 @@ export default defineConfig({
         globals: false,
         environment: 'node',
         include: ['tests/api/**/*.test.ts'],
-        testTimeout: 10000,
-        reporters: ['html']
+        testTimeout: 10000
     },
 });
