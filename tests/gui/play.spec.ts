@@ -17,9 +17,10 @@ test.describe('Play pagina', () => {
             await expect(page.getByTestId('character-description')).toContainText('A level 1 knight');
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('6');
             await expect(page.locator('[data-character-stats="Level"]')).toContainText('1');
+            await expect(page.getByRole('img', {name: 'The base character image'})).toBeVisible();
         });
 
-        await test.step('Button click', async () => {
+        await test.step('Level 2 - Button click', async () => {
             await page.getByTestId('clicker-button').click();
             await page.getByTestId('clicker-button').click();
             await page.getByTestId('clicker-button').click();
@@ -30,9 +31,10 @@ test.describe('Play pagina', () => {
             await expect(page.getByTestId('clicker-button')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('7');
             await expect(page.locator('[data-character-stats="Level"]')).toContainText('2');
+            await expect(page.getByRole('img', {name: 'The characters\' base weapon'})).toBeVisible();
         });
 
-        await test.step('File upload', async () => {
+        await test.step('Level 3 -  upload', async () => {
             await page.getByTestId('uploader-input').setInputFiles({
                 name: 'test.txt',
                 mimeType: 'text/plain',
@@ -43,24 +45,27 @@ test.describe('Play pagina', () => {
             await expect(page.getByTestId('uploader-input')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('8');
             await expect(page.locator('[data-character-stats="Level"]')).toContainText('3');
+            await expect(page.getByRole('img', {name: 'The characters\' base armor'})).toBeVisible();
         });
 
-        await test.step('Typing', async () => {
+        await test.step('Level 4 - Typing', async () => {
             await page.getByTestId('typer-input').fill('Lorem Ipsum');
             await expect(page.getByTestId('toast').filter({hasText: 'Spell cast! +1 Level'})).toBeVisible();
             await expect(page.locator('[data-task="typer"]')).toContainText('Dolar sit amet!');
             await expect(page.getByTestId('typer-input')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('9');
             await expect(page.locator('[data-character-stats="Level"]')).toContainText('4');
+            await expect(page.getByRole('img', {name: 'The characters\' upgraded'})).toBeVisible();
         });
 
-        await test.step('Sliding', async () => {
+        await test.step('Level 5 - Sliding', async () => {
             await page.getByRole('slider').press('End');
             await expect(page.getByTestId('toast').filter({hasText: 'Balance mastered! +1 Level'})).toBeVisible();
             await expect(page.locator('[data-task="slider"]')).toContainText('Slid to the next level!');
             await expect(page.getByRole('slider')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('10');
             await expect(page.locator('[data-character-stats="Level"]')).toContainText('5');
+            await expect(page.getByRole('img', {name: 'The characters\' upgraded armor'})).toBeVisible();
         });
 
         await test.step('Check max level', async () => {
