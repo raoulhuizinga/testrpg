@@ -25,7 +25,7 @@ test.describe('Play pagina', () => {
             await page.getByTestId('clicker-button').click();
             await page.getByTestId('clicker-button').click();
             await page.getByTestId('clicker-button').click();
-            await expect(page.getByTestId('toast').filter({ hasText: 'Click challenge complete! +1 Level' })).toBeVisible();
+            await expect(page.getByTestId('toast').filter({hasText: 'Click challenge complete! +1 Level'})).toBeVisible();
             await expect(page.locator('[data-task="clicker"]')).toContainText('Great job! You levelled up');
             await expect(page.getByTestId('clicker-button')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('7');
@@ -38,7 +38,7 @@ test.describe('Play pagina', () => {
                 mimeType: 'text/plain',
                 buffer: Buffer.from('this is a test')
             });
-            await expect(page.getByTestId('toast').filter({ hasText: 'File received! +1 Level' })).toBeVisible();
+            await expect(page.getByTestId('toast').filter({hasText: 'File received! +1 Level'})).toBeVisible();
             await expect(page.locator('[data-task="uploader"]')).toContainText('File selected, level up!');
             await expect(page.getByTestId('uploader-input')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('8');
@@ -47,7 +47,7 @@ test.describe('Play pagina', () => {
 
         await test.step('Typing', async () => {
             await page.getByTestId('typer-input').fill('Lorem Ipsum');
-            await expect(page.getByTestId('toast').filter({ hasText: 'Spell cast! +1 Level' })).toBeVisible();
+            await expect(page.getByTestId('toast').filter({hasText: 'Spell cast! +1 Level'})).toBeVisible();
             await expect(page.locator('[data-task="typer"]')).toContainText('Dolar sit amet!');
             await expect(page.getByTestId('typer-input')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('9');
@@ -56,7 +56,7 @@ test.describe('Play pagina', () => {
 
         await test.step('Sliding', async () => {
             await page.getByRole('slider').press('End');
-            await expect(page.getByTestId('toast').filter({ hasText: 'Balance mastered! +1 Level' })).toBeVisible();
+            await expect(page.getByTestId('toast').filter({hasText: 'Balance mastered! +1 Level'})).toBeVisible();
             await expect(page.locator('[data-task="slider"]')).toContainText('Slid to the next level!');
             await expect(page.getByRole('slider')).toBeDisabled();
             await expect(page.locator('[data-character-stats="Strength"]')).toContainText('10');
@@ -66,6 +66,14 @@ test.describe('Play pagina', () => {
         await test.step('Check max level', async () => {
             await expect(page.getByTestId('max-level-message')).toBeVisible();
         });
+
+        await test.step('Play again', async () => {
+            await page.getByTestId('play-again-button').click();
+            await expect(page.getByTestId('character-name')).toContainText('Your character');
+            await expect(page.locator('[data-character-stats="Level"]')).toContainText('1');
+            await expect(page.getByTestId('character-name-input')).toBeEmpty();
+        });
+
     });
 
     test('Start without name', async ({page}) => {
